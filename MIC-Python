@@ -1,0 +1,36 @@
+@author: renan
+"""
+
+import matplotlib
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd 
+import plotly.express as px
+import plotly.io as pio
+import plotly.express as px
+import plotly.graph_objects as go
+import numpy as np
+
+
+#%% Importar arquivo
+
+df = pd.read_excel("Arquivo", index_col = 0) #Seu Arquivo
+
+#%%
+sns.heatmap(df, center=0, cmap='BuPu')
+
+#%% Gráfico Interativo
+fig = go.Figure()
+fig.add_trace(
+    go.Heatmap(
+        x = df.columns,
+        y = df.index,
+        z = np.array(df),
+        #text=df.values,
+        #texttemplate='%{text:.2f}'# Esses dois comandos dão inibição e você pode ver seus dados numericos
+        
+    )
+)
+fig.update_xaxes(side="top")
+fig.update_layout(title_text="E.coli", title_x=0.5)
+fig.show()
